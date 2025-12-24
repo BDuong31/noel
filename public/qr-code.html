@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Tree Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <style>
+        /* 1. Dark Mode Environment */
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            background-color: #0d1117; /* GitHub Dark Dimmed */
+            /* Họa tiết lưới (Grid) giống bản vẽ kỹ thuật */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Source Code Pro', monospace;
+            color: #c9d1d9;
+        }
+
+        /* 2. Cửa sổ Terminal */
+        .terminal-window {
+            width: 340px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Thanh tiêu đề giả lập macOS */
+        .title-bar {
+            background: #0d1117;
+            padding: 10px 15px;
+            display: flex; gap: 8px;
+            border-bottom: 1px solid #30363d;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+        .path { margin-left: auto; font-size: 12px; color: #8b949e; opacity: 0.7; }
+
+        /* Nội dung chính */
+        .content {
+            padding: 25px;
+            text-align: center;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* 3. Tiêu đề phong cách Code */
+        .code-line {
+            color: #79c0ff; /* Xanh dương nhạt */
+            font-size: 14px;
+            margin-bottom: 5px;
+            align-self: flex-start;
+        }
+        .variable { color: #d2a8ff; } /* Tím */
+        .string { color: #a5d6ff; } /* Xanh nhạt */
+
+        h1 {
+            font-size: 22px;
+            color: #7ee787; /* Xanh lá neon (GitHub success) */
+            margin: 10px 0 20px 0;
+            text-shadow: 0 0 10px rgba(126, 231, 135, 0.4);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #7ee787; /* Con trỏ nhấp nháy */
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        /* Animation gõ chữ */
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #7ee787; } }
+
+        /* 4. Khung QR Techy */
+        .qr-wrapper {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px dashed #30363d;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .qr-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(126, 231, 135, 0.2);
+            border-color: #7ee787;
+        }
+
+        /* Icon Giáng sinh kiểu Pixel/IT */
+        .tech-decor {
+            position: absolute;
+            font-size: 20px;
+            background: #161b22;
+            padding: 5px;
+            border-radius: 50%;
+            border: 1px solid #30363d;
+        }
+        .bug { top: -10px; right: -10px; color: #ff7b72; } /* Con bọ (Bug) màu đỏ */
+        .tree { bottom: -10px; left: -10px; color: #7ee787; }
+
+        /* Link */
+        .link {
+            margin-top: 20px;
+            display: inline-block;
+            color: #a5d6ff;
+            text-decoration: none;
+            background: rgba(56, 139, 253, 0.1);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .link:hover { background: rgba(56, 139, 253, 0.2); }
+
+        /* 5. Nút bấm kiểu Command */
+        #btn-save {
+            margin-top: 25px;
+            background: transparent;
+            color: #7ee787;
+            border: 1px solid #7ee787;
+            padding: 10px 20px;
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex; align-items: center; gap: 10px;
+        }
+        #btn-save:hover {
+            background: rgba(126, 231, 135, 0.1);
+            box-shadow: 0 0 15px rgba(126, 231, 135, 0.3);
+        }
+        #btn-save:active { transform: translateY(2px); }
+
+    </style>
+</head>
+<body>
+
+    <div class="terminal-window" id="card-capture">
+        <div class="title-bar">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div class="path">~/christmas/magic-tree</div>
+        </div>
+
+        <div class="content">
+            <div class="code-line">
+                <span style="color: #ff7b72">const</span> <span class="variable">event</span> = <span class="string">"Christmas_2025"</span>;
+            </div>
+            
+            <h1>&lt;MagicTreeExperience /&gt;</h1>
+
+            <div class="qr-wrapper">
+                <div id="qrcode"></div>
+                <div class="tech-decor bug"><i class="fas fa-bug"></i></div>
+                <div class="tech-decor tree"><i class="fas fa-tree"></i></div>
+            </div>
+
+            <a href="https://noel.baso.id.vn" class="link">
+                <i class="fas fa-link"></i> noel.baso.id.vn
+            </a>
+            
+            <button id="btn-save">
+                <i class="fas fa-terminal"></i> sudo save_image
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script>
+        // 1. Tạo QR Code (Màu tối cho dễ quét trên nền trắng của ô QR)
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://noel.baso.id.vn",
+            width: 160, height: 160,
+            colorDark : "#0d1117", // Màu đen GitHub
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+
+        // 2. Chức năng Lưu ảnh (Giữ nguyên style Dark Mode)
+        document.getElementById("btn-save").addEventListener("click", function() {
+            const btn = this;
+            const originalHTML = btn.innerHTML;
+            
+            // Đổi text nút khi đang xử lý
+            btn.innerHTML = '<i class="fas fa-cog fa-spin"></i> compiling...';
+            
+            html2canvas(document.getElementById("card-capture"), {
+                scale: 3, 
+                backgroundColor: null 
+            }).then(canvas => {
+                // Tạo nền background tối cho ảnh xuất ra
+                const finalCanvas = document.createElement('canvas');
+                const padding = 50;
+                finalCanvas.width = canvas.width + (padding * 2);
+                finalCanvas.height = canvas.height + (padding * 2);
+                const ctx = finalCanvas.getContext('2d');
+
+                // Vẽ nền đen (GitHub Dark Dimmed)
+                ctx.fillStyle = "#0d1117";
+                ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+
+                // Vẽ lưới grid mờ lên nền
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+                ctx.lineWidth = 1;
+                const gridSize = 30 * 3; // Scale theo độ phân giải ảnh
+                for(let x=0; x<finalCanvas.width; x+=gridSize) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x, finalCanvas.height); ctx.stroke(); }
+                for(let y=0; y<finalCanvas.height; y+=gridSize) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(finalCanvas.width, y); ctx.stroke(); }
+
+                // Vẽ Terminal vào giữa
+                ctx.drawImage(canvas, padding, padding);
+
+                // Tải về
+                const link = document.createElement('a');
+                link.download = 'MagicTree_IT_Edition.png';
+                link.href = finalCanvas.toDataURL();
+                link.click();
+                
+                btn.innerHTML = '<i class="fas fa-check"></i> executed!';
+                setTimeout(() => btn.innerHTML = originalHTML, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
